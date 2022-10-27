@@ -2,7 +2,7 @@ Reactive gRPC Spring Boot Demo
 ==============================
 
 Spring Boot Application with reactive gRPC support backbone by https://github.com/salesforce/reactive-grpc and https://github.com/LogNet/grpc-spring-boot-starter
-       
+
 # Features
 
 * Spring Boot integration with [grpc-spring-boot-starter](https://github.com/LogNet/grpc-spring-boot-starter)
@@ -14,37 +14,39 @@ Spring Boot Application with reactive gRPC support backbone by https://github.co
 * Modify protobuf-maven-plugin with 'reactor-grpc' protocPlugin support
 
 ```xml
+
 <plugin>
-   <groupId>org.xolstice.maven.plugins</groupId>
-   <artifactId>protobuf-maven-plugin</artifactId>
-   <version>0.6.1</version>
-   <configuration>
-       <protocArtifact>com.google.protobuf:protoc:${protobuf-java.version}:exe:${os.detected.classifier}
-       </protocArtifact>
-       <pluginId>grpc-java</pluginId>
-       <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}
-       </pluginArtifact>
-       <protocPlugins>
-           <protocPlugin>
-               <id>reactor-grpc</id>
-               <groupId>com.salesforce.servicelibs</groupId>
-               <artifactId>reactor-grpc</artifactId>
-               <version>${reactive-grpc.version}</version>
-               <mainClass>com.salesforce.reactorgrpc.ReactorGrpcGenerator</mainClass>
-           </protocPlugin>
-       </protocPlugins>
-   </configuration>
-   <executions>
-       <execution>
-           <goals>
-               <goal>compile</goal>
-               <goal>compile-custom</goal>
-           </goals>
-       </execution>
-   </executions>
+    <groupId>org.xolstice.maven.plugins</groupId>
+    <artifactId>protobuf-maven-plugin</artifactId>
+    <version>0.6.1</version>
+    <configuration>
+        <protocArtifact>com.google.protobuf:protoc:${protobuf-java.version}:exe:${os.detected.classifier}
+        </protocArtifact>
+        <pluginId>grpc-java</pluginId>
+        <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}
+        </pluginArtifact>
+        <protocPlugins>
+            <protocPlugin>
+                <id>reactor-grpc</id>
+                <groupId>com.salesforce.servicelibs</groupId>
+                <artifactId>reactor-grpc</artifactId>
+                <version>${reactive-grpc.version}</version>
+                <mainClass>com.salesforce.reactorgrpc.ReactorGrpcGenerator</mainClass>
+            </protocPlugin>
+        </protocPlugins>
+    </configuration>
+    <executions>
+        <execution>
+            <goals>
+                <goal>compile</goal>
+                <goal>compile-custom</goal>
+            </goals>
+        </execution>
+    </executions>
 </plugin>
 ```
 
+* Generate code from protobuf file by `mvn compile`.
 * Implement gRPC service to extend reactive class
 
 ```
@@ -63,7 +65,6 @@ public class ReactiveAccountServiceGrpcImpl extends ReactorAccountServiceGrpc.Ac
 ```
 
 * Test gRPC services with index.http
-
 
 # Mapper between domain model and Protobuf message
 
